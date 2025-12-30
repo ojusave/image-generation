@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generation - BlackForest Labs</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Image Generator</h1>
+            <p class="subtitle">Powered by BlackForest Labs FLUX</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="prompt">Enter your prompt:</label>
+                    <textarea 
+                        id="prompt" 
+                        placeholder="Describe the image you want to generate... e.g., 'A beautiful sunset over mountains, digital art style'"
+                        rows="4"
+                    ></textarea>
+                </div>
+
+                <div class="options-group">
+                    <div class="option">
+                        <label for="width">Width:</label>
+                        <select id="width">
+                            <option value="512">512</option>
+                            <option value="768">768</option>
+                            <option value="1024" selected>1024</option>
+                            <option value="1280">1280</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <label for="height">Height:</label>
+                        <select id="height">
+                            <option value="512">512</option>
+                            <option value="768">768</option>
+                            <option value="1024" selected>1024</option>
+                            <option value="1280">1280</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <label for="format">Format:</label>
+                        <select id="format">
+                            <option value="jpeg" selected>JPEG</option>
+                            <option value="png">PNG</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="generateBtn" class="generate-btn">
+                    <span class="btn-text">Generate Image</span>
+                    <span class="btn-loader" style="display: none;">
+                        <span class="spinner"></span>
+                        Generating...
+                    </span>
+                </button>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+            <div id="resultSection" class="result-section" style="display: none;">
+                <h2>Generated Image</h2>
+                <div class="image-container">
+                    <img id="generatedImage" src="" alt="Generated image">
+                </div>
+                <div class="image-actions">
+                    <a id="downloadLink" href="#" download class="download-btn">Download Image</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
