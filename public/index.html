@@ -17,9 +17,30 @@
             <div class="input-section">
                 <div class="form-group">
                     <label for="prompt">Enter your prompt:</label>
+                    <div class="prompt-container">
+                        <textarea 
+                            id="prompt" 
+                            placeholder="Describe the image you want to generate... e.g., 'A beautiful sunset over mountains, digital art style'"
+                            rows="4"
+                        ></textarea>
+                        <button id="enhanceBtn" class="enhance-btn" type="button">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="enhancedPromptSection" class="form-group enhanced-prompt-section" style="display: none;">
+                    <div class="enhanced-prompt-header">
+                        <label>
+                            <input type="checkbox" id="useEnhancedPrompt" />
+                            <span>Use enhanced prompt</span>
+                        </label>
+                    </div>
                     <textarea 
-                        id="prompt" 
-                        placeholder="Describe the image you want to generate... e.g., 'A beautiful sunset over mountains, digital art style'"
+                        id="enhancedPrompt" 
+                        placeholder="Enhanced prompt will appear here..."
                         rows="4"
                     ></textarea>
                 </div>
@@ -75,6 +96,7 @@
         </main>
     </div>
 
+    <script src="enhancePrompt.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
