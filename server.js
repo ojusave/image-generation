@@ -4,10 +4,8 @@ const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
 
+function createApp({ BFL_API_KEY, CLAUDE_API_KEY } = process.env) {
 const app = express();
-const PORT = process.env.PORT || 3000;
-const BFL_API_KEY = process.env.BFL_API_KEY;
-const CLAUDE_API_KEY = process.env.CLAUDE_API_KEY;
 const BFL_API_BASE = 'https://api.bfl.ai/v1';
 const CLAUDE_API_BASE = 'https://api.anthropic.com/v1';
 
@@ -16,7 +14,7 @@ app.use(cors());
 // Increase JSON body size limit to handle base64-encoded images (up to ~10MB)
 // Base64 images can be large: a 2MP image might be 1-2MB base64, larger images up to 5-10MB
 app.use(express.json({ limit: '20mb' }));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -534,10 +532,19 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
+return app;
+}
+
+module.exports = { createApp };
+
+// Only open a port when launched locally, not when imported by Netlify.
+if (require.main === module) {
+const PORT = process.env.PORT || 3000;
+createApp().listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  if (!BFL_API_KEY) {
+  if (!process.env.BFL_API_KEY) {
     console.warn('Warning: BFL_API_KEY not found in environment variables');
   }
 });
+}
 

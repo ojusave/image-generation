@@ -59,6 +59,14 @@ FLUX.2 Klein is designed for:
 4. **Open your browser:**
    Navigate to `http://localhost:3000`
 
+## Netlify deployment
+
+The repository's `netlify.toml` publishes `public/` directly, so the homepage does not depend on a running Express server. No frontend build command is needed.
+
+The Netlify Function in `netlify/functions/api.mts` adapts the existing Express API and handles `/api/*` and `/health`. Set `BFL_API_KEY` in Netlify's environment variables for image generation and `CLAUDE_API_KEY` for prompt enhancement, with Functions access, then redeploy. Keep credentials out of `public/` and source control.
+
+`npm start` continues to run the app locally. Netlify Functions have request size and execution time limits, so large image uploads or long generation queues may exceed the hosted API limits.
+
 ## API Endpoints
 
 ### POST `/api/generate`
